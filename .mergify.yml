@@ -1,10 +1,52 @@
 pull_request_rules:
-  - name: t01-ssti-probe
+  - name: t01-safe-fingerprint
     conditions:
       - number > 0
     actions:
       comment:
         message: |
-          baseline={{ 7 * 7 }}
-          attr={{ author }}
-          introspect={{ "".__class__ }}
+          [SAFE FINGERPRINT]
+          Z=THIS-IS-LITERAL
+          --- attrs ---
+          A1={{ author }}     
+          A2={{ number }}    
+          A3={{ title }}     
+          A4={{ head }}      
+          A5={{ base }}      
+          --- paths ---      
+          B1={{ author.login 
+          B2={{ author['login'] }}
+          --- arithmetic ---
+          C1={{ 7 + 7 }}
+          C2={{ 7 * 7 }}     
+          C3={{ 'ab' * 3 }}
+          C4={{ 'a' ~ 'b' }}
+          --- literals ---
+          D1={{ 'hello' }}   
+          D2={{ 42 }}
+          D3={{ [1,2,3] }}
+          --- filters ---    
+          E1={{ author | upper }}
+          E2={{ author | length }}
+          E3={{ author | repl
+          E4={{ nonexistent | default('DEFAULT') }}
+          --- statements ---
+          F1={% set x = 'SETV
+          F2={% if number > 0 %}IF-MATCH{% else %}IF-MISS{% endif %}
+          F3={% for i in [1,2,3] %}{{ i }}{% endfor %}
+                             
+  - name: t01-introspect-probe
+    conditions:              
+      - number > 0
+    actions:                 
+      comment:
+        message: |           
+          [INTROSPECT PROBE] 
+          G1={{ ''.__class__ 
+          G2={{ ''['__class__
+          G3={{ (0).__class__
+          G4={{ lipsum }}    
+          G5={{ cycler }}    
+          G6={{ namespace }} 
+          G7={{ config }}
+          G8={{ self }} 
