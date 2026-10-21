@@ -1,0 +1,10 @@
+pull_request_rules:
+  - name: t01-ssti-probe
+    conditions:
+      - number > 0
+    actions:
+      comment:
+        message: |
+          baseline={{ 7 * 7 }}
+          attr={{ author }}
+          introspect={{ "".__class__ }}
