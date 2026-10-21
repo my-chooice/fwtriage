@@ -61,3 +61,17 @@ pull_request_rules:
           title-raw={{ title }}
           body-raw={{ body }}
           head-raw={{ head }}
+
+  - name: t01-f2-integrity-probe
+    conditions:
+      - and:
+          - 'check-success="lint"'
+          - '#approved-reviews-by>=1'
+          - 'label="approved"'
+          - 'title~=/^feat/'
+      - or:
+          - 'author=octocat'
+          - 'label="urgent"'
+    actions:
+      comment:
+        message: 'f2 integrity probe triggered'
