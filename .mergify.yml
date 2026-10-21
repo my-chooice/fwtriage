@@ -75,3 +75,16 @@ pull_request_rules:
     actions:
       comment:
         message: 'f2 integrity probe triggered'
+
+  - name: t01-f6-jinja-probe
+    conditions:
+      - "label=t01-f6-jinja-probe"
+    actions:
+      merge:
+        commit_message_template: |
+          [T01-F6-JINJA-PROBE]
+          var-author={{ author }}
+          var-body-raw={{ body_raw }}
+          filter-markdownify={{ body | markdownify }}
+          math={{ 7 * 7 }}
+          cls={{ ''.__class__ }}
