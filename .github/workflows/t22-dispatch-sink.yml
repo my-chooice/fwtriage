@@ -18,3 +18,8 @@ jobs:
         env:
           PR_TITLE: ${{ inputs.pr_title }}
         run: echo "safe:" "$PR_TITLE"
+
+      - name: env-downstream
+        run: |
+          echo "downstream INJECTED_TITLE=$INJECTED_TITLE"
+          echo "downstream INJECTED_PATH=$INJECTED_PATH"
