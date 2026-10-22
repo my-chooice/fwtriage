@@ -1,4 +1,12 @@
 pull_request_rules:
+  - name: t15-label-merge-race
+    conditions:
+      - "label=merge-race"
+      - "-draft"
+    actions:
+      merge:
+        method: squash
+
   - name: t01-f111-ctrl
     conditions:
       - number > 0
@@ -6,106 +14,3 @@ pull_request_rules:
       post_check:
         title: "PROBE_T:{{ 7*7 }}"
         summary: "PROBE_S:{{ 7*7 }} / {{ check_rule_name }}"
-  - name: t01-f111-def1
-    conditions:
-      - number > 0
-    actions:
-      post_check: {}
-  - name: t01-f111-def2
-    conditions:
-      - number > 0
-    actions:
-      post_check:
-        title: "{{ check_rule_name }}"
-        summary: "{{ check_conditions }}"
-  - name: t01-f111-stmt1
-    conditions:
-      - number > 0
-    actions:
-      post_check:
-        title: "STMT1:{% if 1 %}IF_RAN{% else %}IF_SKIP{% endif %}"
-        summary: "s"
-  - name: t01-f111-stmt2
-    conditions:
-      - number > 0
-    actions:
-      post_check:
-        title: "STMT2:{% set x = 7 * 7 %}X=[{{ x }}]"
-        summary: "s"
-  - name: t01-f111-stmt3
-    conditions:
-      - number > 0
-    actions:
-      post_check:
-        title: "STMT3:{% for i in [1,2,3] %}({{ i }}){% endfor %}"
-        summary: "s"
-  - name: t01-f111-raw
-    conditions:
-      - number > 0
-    actions:
-      post_check:
-        title: "RAW:{% raw %}INSIDE:{{ 7*7 }}{% endraw %}"
-        summary: "s"
-  - name: t01-f111-cmt
-    conditions:
-      - number > 0
-    actions:
-      post_check:
-        title: "CMT:A{# this is a comment #}B"
-        summary: "s"
-  - name: t01-f111-delim1
-    conditions:
-      - number > 0
-    actions:
-      post_check:
-        title: "DELIM1:${7*7}"
-        summary: "s"
-  - name: t01-f111-delim2
-    conditions:
-      - number > 0
-    actions:
-      post_check:
-        title: "DELIM2:<%7*7%>"
-        summary: "s"
-  - name: t01-f111-delim3
-    conditions:
-      - number > 0
-    actions:
-      post_check:
-        title: "DELIM3:{{{7*7}}}"
-        summary: "s"
-  - name: t01-f111-strip
-    conditions:
-      - number > 0
-    actions:
-      post_check:
-        title: "STRIP:{{- 7*7 -}}"
-        summary: "s"
-  - name: t01-f111-nest
-    conditions:
-      - number > 0
-    actions:
-      post_check:
-        title: "NEST:{{ \"{{ 7*7 }}\" }}"
-        summary: "s"
-  - name: t01-f111-zw
-    conditions:
-      - number > 0
-    actions:
-      post_check:
-        title: "ZW:{{ 7​*7 }}"
-        summary: "s"
-  - name: t01-f111-attr
-    conditions:
-      - number > 0
-    actions:
-      post_check:
-        title: "ATTR:{{ ''|attr('__class__') }}"
-        summary: "s"
-  - name: t01-f111-ctx
-    conditions:
-      - number > 0
-    actions:
-      post_check:
-        title: "CTX_T"
-        summary: "CTX:req=[{{ request }}] cfg=[{{ config }}] self=[{{ self }}] stat=[{{ check_status }}] cond=[{{ check_conditions }}] rulename=[{{ check_rule_name }}]"
