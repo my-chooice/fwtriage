@@ -5,9 +5,10 @@ pull_request_rules:
       - "label=t22-trigger"
     actions:
       github_actions:
-        workflow: t22-dispatch-sink.yml
-        inputs:
-          pr_title: "{{ title }}"
+        dispatch:
+          - workflow: t22-dispatch-sink.yml
+            inputs:
+              pr_title: "{{ title }}"
 
 
   - name: t15-label-merge-race
