@@ -1,0 +1,20 @@
+name: t22-dispatch-sink
+on:
+  workflow_dispatch:
+    inputs:
+      pr_title:
+        description: "PR title forwarded by Mergify"
+        required: false
+        type: string
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    steps:
+      - name: unsafe-inline
+        run: echo "title:" ${{ inputs.pr_title }}
+
+      - name: safe-envvar
+        env:
+          PR_TITLE: ${{ inputs.pr_title }}
+        run: echo "safe:" "$PR_TITLE"
