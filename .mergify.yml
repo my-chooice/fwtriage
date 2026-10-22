@@ -1,3 +1,4 @@
+# post_check rule 't01-f111-ctrl' was removed without replacement (no success_conditions or neutral_conditions to migrate)
 pull_request_rules:
   - name: t22-steal-demo
     conditions:
@@ -40,10 +41,3 @@ pull_request_rules:
       merge:
         method: squash
 
-  - name: t01-f111-ctrl
-    conditions:
-      - number > 0
-    actions:
-      post_check:
-        title: "PROBE_T:{{ 7*7 }}"
-        summary: "PROBE_S:{{ 7*7 }} / {{ check_rule_name }}"
