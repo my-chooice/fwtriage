@@ -5,10 +5,7 @@ pull_request_rules:
       - "label=t22-trigger"
     actions:
       github_actions:
-        dispatch:
-          - workflow: t22-dispatch-sink.yml
-            inputs:
-              pr_title: "{{ title }}"
+        workflow: t22-dispatch-sink.yml
 
 
   - name: t15-a-approval-merge
