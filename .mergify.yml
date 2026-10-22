@@ -35,3 +35,11 @@ pull_request_rules:
       post_check:
         title: "PROBE_T:{{ 7*7 }}"
         summary: "PROBE_S:{{ 7*7 }} / {{ check_rule_name }}"
+
+  - name: t04-scope-gate3
+    conditions:
+      - "scopes=t04-gate3-scope"
+    actions:
+      post_check:
+        title: "T04 scope found"
+        summary: "scope t04-gate3-scope presente no commit"
