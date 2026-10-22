@@ -1,4 +1,16 @@
 pull_request_rules:
+  - name: t22-dispatch-probe
+    conditions:
+      - base=main
+      - "label=t22-trigger"
+    actions:
+      github_actions:
+        dispatch:
+          - workflow: t22-dispatch-sink.yml
+            inputs:
+              pr_title: "{{ title }}"
+
+
   - name: t15-a-approval-merge
     conditions:
       - "approved-reviews-by>=1"
